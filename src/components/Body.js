@@ -1,3 +1,6 @@
+
+import RestaurantCard from  './RestaurantCard';
+import RestaurantList from "../utils/mockData";
 const Body = () => {
     return (
         <div className = "body">
@@ -7,3 +10,4 @@ const Body = () => {
   </div>
     
  )};
+ export default Body;

@@ -2016,4 +2016,4 @@ const RestaurantList =  {
       ],
 
 }
-export default RestaurantList
+export default RestaurantList;

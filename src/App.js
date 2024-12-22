@@ -1,20 +1,9 @@
 
 import React from 'react';
 import ReactDOM from "react-dom/client";
-
-const Title =  () => 
-   ( 
-   <div className = "title">
-   <a href="/">
-      <img
-      className = "logo"
-       alt="React Logo"
-       src={LOGO_URL}
-       />
-       </a>
-</div>
-      
-    )
+import Header from "./components/Header";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
 
 
 
@@ -27,14 +16,7 @@ const Title =  () =>
 
 
 
-    const Footer = () => {
-    return  (
-        
-    <div>
-       <h3>Footer</h3> 
 
-    </div>
-    )}
 
 const AppLayout = () => {
     return (
