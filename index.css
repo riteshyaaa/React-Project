@@ -27,12 +27,14 @@
 
 .restaurant-card{
     width:200px;
-    margin: 5px;
+
+    margin: 20px 5px;
     border: 1px solid rgb(107, 33, 33);
 
 }
 
 .restaurant-card > img{
+   
 
     width:100%;
 
@@ -40,4 +42,11 @@
 .restaurant-card > h4{
   word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+
+.filter-btn{
+ margin: 10px;
+ cursor: pointer;
+
 }
