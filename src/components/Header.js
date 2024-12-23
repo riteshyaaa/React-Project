@@ -6,7 +6,7 @@ const Header = () =>
       <div className = "title">
    <a href="/">
       <img
-      className = "logo"
+      className = "logo" 
        alt="React Logo"
        src={LOGO_URL}
        />

@@ -1,4 +1,4 @@
-const RestaurantList =  {
+let RestaurantList =  {
     "restaurants": [
         {
           "info": {

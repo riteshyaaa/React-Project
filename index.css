@@ -25,25 +25,32 @@
    
 }
 
-.restaurant-card{
+.res-card{
     width:200px;
-
+    height:auto;
     margin: 20px 5px;
     border: 1px solid rgb(107, 33, 33);
 
 }
 
-.restaurant-card > img{
-   
+.res-images{
+   height:200px;
 
     width:100%;
 
 }
-.restaurant-card > h4{
-  word-wrap: break-word;
-    overflow-wrap: break-word;
+
+.restaurant-container{
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 
+.search{
+
+   
+    margin: 10px;
+}
 
 .filter-btn{
  margin: 10px;
