@@ -1,76 +1,28 @@
-
+import React from 'react';
 import RestaurantCard from  './RestaurantCard';
 import RestaurantList from "../utils/mockData";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 const Body = () => {
-    const[RestaurantList, setRestaurantList] = useState([
-        {
-          "name": "The Italian Bistro",
-          "cuisine": "Italian",
-          "cloudinaryImageId": "e0839ff574213e6f35b3899ebf1fc597",
-          "id": "9",
-          "rating": 4.5,
-          "location": "123 Main Street, New York, NY"
-        },
-        {
-          "name": "Sushi Paradise",
-          "cuisine": "Japanese",
-          "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/7/18/4f1ba845-4c45-48da-8d01-8902f7f8483e_683064.jpg",
-          "id": "8",
-          "rating": 4.7,
-          "location": "456 Elm Street, San Francisco, CA"
-        },
-        {
-          "name": "Spice Symphony",
-          "cuisine": "Indian",
-          "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/11/953faded-a1ae-4066-9824-3ecd82211039_233329.jpg",
-          "id": "7",
-          "rating": 3,
-          "location": "789 Pine Avenue, Chicago, IL"
-        },
-        {
-          "name": "The Green Table",
-          "cuisine": "Vegan",
-          "cloudinaryImageId": "5116a385bac0548e06c33c08350fbf11",
-          "id": "6",
-          "rating": 4.6,
-          "location": "321 Oak Lane, Portland, OR"
-        },
-        {
-          "name": "Steakhouse Supreme",
-          "cuisine": "American",
-          "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/12/9/8b2db334-567e-45d0-9416-a4129239caec_645478.JPG",
-          "id": "5",
-          "rating": 2,
-          "location": "987 Walnut Drive, Austin, TX"
-        },
-          {
-            "name": "The Italian Bistro",
-            "cuisine": "Italian",
-            "cloudinaryImageId": "e0839ff574213e6f35b3899ebf1fc597",
-            "id": "9",
-            "rating": 4.5,
-            "location": "123 Main Street, New York, NY"
-          },
-          {
-            "name": "Sushi Paradise",
-            "cuisine": "Japanese",
-            "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/7/18/4f1ba845-4c45-48da-8d01-8902f7f8483e_683064.jpg",
-            "id": "8",
-            "rating": 4.7,
-            "location": "456 Elm Street, San Francisco, CA"
-          },
-          {
-            "name": "Spice Symphony",
-            "cuisine": "Indian",
-            "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/11/953faded-a1ae-4066-9824-3ecd82211039_233329.jpg",
-            "id": "7",
-            "rating": 3,
-            "location": "789 Pine Avenue, Chicago, IL"
-          },
-          
-      ]
-      );
+    
+    let [listRestuarant, setlistRestuarant] = useState([]);
+    console.log("Body")
+
+    useEffect(() => {
+       console.log("API Policy is not granted ")
+      fetchData();
+    },[]);
+
+    const fetchData = async () =>{
+     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&collection=83633&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
+      const json = await data?.json()
+ console.log(json);
+ console.log(" After API call ")
+ setlistRestuarant(json.data.cards);
+ console.log(setlistRestuarant)
+    
+    }
+   
+    console.log("Bodies")
     return (
         <div className = "body">
             <div className= "search" >
@@ -81,14 +33,18 @@ const Body = () => {
                       <div className = "filter">
                          <button className ="filter-btn"
                          onClick={()=>{
-                           const filteredrestaurant = RestaurantList.filter((restaurant) => restaurant.rating > 4); 
-                            setRestaurantList(filteredrestaurant);
+                           let filteredrestaurant = listRestuarant?.filter((restaurant) => restaurant?.avgRating > 4.5); 
+                           setlistRestuarant(filteredrestaurant);
+                           
+                           
+                         
+                            console.log(" filterButton clicked")
                          }}> Top rated restaurants
                          </button>
                       </div>
           <div className = "restaurant-container"> 
-     {RestaurantList.map((restaurant) => {
-         return <RestaurantCard {...restaurant}  key= {restaurant.id} />
+     {listRestuarant?.map((restaurant) => {
+         return <RestaurantCard {...restaurant.card.card}  key= {restaurant.id} />
      })}
      </div>
   </div>
