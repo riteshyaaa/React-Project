@@ -13,7 +13,7 @@ const Body = () => {
     },[]);
 
     const fetchData = async () =>{
-     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&collection=83633&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
+     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.68852152883197&lng=83.23767364025116&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data?.json()
  console.log(json);
  console.log(" After API call ")
@@ -44,7 +44,7 @@ const Body = () => {
                       </div>
           <div className = "restaurant-container"> 
      {listRestuarant?.map((restaurant) => {
-         return <RestaurantCard {...restaurant.card.card}  key= {restaurant.id} />
+         return <RestaurantCard {...restaurant.card.card.imageGridCards.info}  key= {restaurant.id} />
      })}
      </div>
   </div>
