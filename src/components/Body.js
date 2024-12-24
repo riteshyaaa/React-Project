@@ -8,17 +8,17 @@ const Body = () => {
     console.log("Body")
 
     useEffect(() => {
-       console.log("API Policy is not granted ")
+       
       fetchData();
     },[]);
 
     const fetchData = async () =>{
-     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.68852152883197&lng=83.23767364025116&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.9690247&lng=72.8205292&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data?.json()
  console.log(json);
- console.log(" After API call ")
- setlistRestuarant(json.data.cards);
- console.log(setlistRestuarant)
+      
+ setlistRestuarant(json?.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+ 
     
     }
    
@@ -33,7 +33,7 @@ const Body = () => {
                       <div className = "filter">
                          <button className ="filter-btn"
                          onClick={()=>{
-                           let filteredrestaurant = listRestuarant?.filter((restaurant) => restaurant?.avgRating > 4.5); 
+                           let filteredrestaurant = listRestuarant?.filter((restaurant) => restaurant?.info?.avgRating > 4.5); 
                            setlistRestuarant(filteredrestaurant);
                            
                            
@@ -44,7 +44,7 @@ const Body = () => {
                       </div>
           <div className = "restaurant-container"> 
      {listRestuarant?.map((restaurant) => {
-         return <RestaurantCard {...restaurant.card.card.imageGridCards.info}  key= {restaurant.id} />
+         return <RestaurantCard {...restaurant.info}  key= {restaurant.id} />
      })}
      </div>
   </div>
