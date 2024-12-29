@@ -3,14 +3,29 @@ import {CDN_URL} from "../utils/constants";
 const RestaurantCard = ({name,cuisines,avgRating,cloudinaryImageId}) =>{
     return (
         <>
-        <div className = "res-card">
-            <img className = "res-images"
+        <div className = "res-card m-4 p-4 w-[220px] h-[350px] bg-gray-200 hover:bg-gray-300 rounded-lg flex flex-col transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+            <img className = "rounded-lg w-full h-[150px] object-cover"
             src = {CDN_URL+ cloudinaryImageId}/>  
-        <h2 >{name} </h2>
+        <h2 className = "font-bold py-2 text-lg truncate">{name} </h2>
         <h4 className = "cuisines">{cuisines.join(", ")}</h4>
-        <h4>{avgRating}stars</h4>
+        <h4 className = "ml-2 text-gray-700 font-semibold">{avgRating}stars</h4>
         </div>
         </> 
     )
 };
+
+
+// Higher Order Component 
+// imput - RestauuratnCard ==> RestaurantCardpromoted
+
+ export const withPromotedLabel = (RestaurantCard) => {
+    return (props) => {
+        return (
+            <div className = "promoted-label">
+                <h4>Promoted</h4>
+                <RestaurantCard {...props}/>
+            </div>
+        )
+    }
+}
 export default RestaurantCard;

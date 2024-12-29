@@ -10,24 +10,23 @@ const Header = () => {
     const OnlineStatus = useOnlineStatus();
    return  (
  
-   <div className = "header">
-      <div className = "title">
-   <a href="/">
-      <img
-      className = "logo" 
-       alt="React Logo"
-       src={LOGO_URL}
-       />
-       </a>
-</div>
-      <div className = "nav-items">
-       <ul>
-          <li> Online status:{OnlineStatus? "✅" : "🔴"} </li>
-          <li> <Link to ="/">  Home</Link></li>
-          <li> <Link to ="/about">About </Link></li>
-          <li> <Link to ="/contact">Contact</Link></li>
-          <li><Link to ="/cart">cart </Link></li>
-          <li><Link to ="/Grocery">Grocery </Link></li>
+   <div className = "flex justify-between shadow-md">
+      <div className = "logo-container">
+           <a href="/">
+                 <img className = "w-20" 
+                      alt="React Logo"
+                      src={LOGO_URL}
+                      />
+                      </a>
+         </div>
+      <div className = "flex items-center">
+       <ul className="flex p-4 m-4">
+          <li className="px-4 flex items-center"> Online status:{OnlineStatus? "✅" : "🔴"} </li>
+          <li className="px-4"> <Link to ="/">  Home</Link></li>
+          <li className="px-4"> <Link to ="/about">About </Link></li>
+          <li className="px-4" ><Link to ="/contact">Contact</Link></li>
+          <li className="px-4"><Link to ="/cart">cart </Link></li>
+          <li className="px-4"><Link to ="/Grocery">Grocery </Link></li>
           <button className = "login"
           onClick={() => {(loginLogout == "login")?
             setloginLogout("logout"):

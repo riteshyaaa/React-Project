@@ -8,12 +8,12 @@ const RestauranstMenu =  () => {
 
          const {resId} = useParams()
          const resInfo = useRestaurantsMenu(resId)
+        
    
      if(resInfo == null)return <Shimmer/>
-
      const{ name,cuisines,costForTwoMessage} = resInfo.cards[2].card.card.info;
-
         const{itemCards} = resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+        
         
     return (
         <div>
@@ -27,8 +27,8 @@ const RestauranstMenu =  () => {
             <ul>
                 {itemCards.map((res) =>(
                     <li key ={res.card.info.id} >
-                    {res.card.info.name}-{"Rs "}
-                    {res.card.info.price/100}
+                    {res.card.info.name}-{"Rs "}                
+                    {(res.card.info.price/100)||(res.card.info.defaultPrice/100)}
                     </li>)
             )}
                 
