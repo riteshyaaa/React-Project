@@ -18,14 +18,14 @@ const RestaurantCard = ({name,cuisines,avgRating,cloudinaryImageId}) =>{
 // Higher Order Component 
 // imput - RestauuratnCard ==> RestaurantCardpromoted
 
- export const withPromotedLabel = (RestaurantCard) => {
-    return (props) => {
-        return (
-            <div className = "promoted-label">
-                <h4>Promoted</h4>
-                <RestaurantCard {...props}/>
-            </div>
-        )
-    }
-}
+//  export const withPromotedLabel = (RestaurantCard) => {
+//     return (props) => {
+//         return (
+//             <div className = "promoted-label">
+//                 <label>Promoted</label>
+//                 <RestaurantCard {...props}/>
+//             </div>
+//         )
+//     }
+// }
 export default RestaurantCard;
