@@ -58,7 +58,7 @@ const AppLayout = () => {
         },
         {
             path: "/restaurants/:resId",
-            element: <RestaurantsMenu/>
+            element: <RestaurantsMenu/> 
         }
 
 

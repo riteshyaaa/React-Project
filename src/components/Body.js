@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import Shimmer from './Shimmer';
 import {Link} from "react-router-dom"
+import RestaurantCard, {withPromotedLabel} from  './RestaurantCard';
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {    
@@ -9,7 +10,7 @@ const Body = () => {
     const [filterRes, setfilterRes] = useState([]);    
     const [searchtext, setsearchtext] = useState("");
 
-   
+    const PromotedRestaurant = withPromotedLabel(RestaurantCard)
     
 
     useEffect(() => {
@@ -17,15 +18,13 @@ const Body = () => {
       fetchData();
     },[]);
     const fetchData = async () =>{
-     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.9690247&lng=72.8205292&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data?.json();
 
          const restaurant = json?.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 
          if ( restaurant=== undefined ){
-          restaurant =
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
+          restaurant = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
          }
 
 
@@ -66,18 +65,21 @@ const Body = () => {
                            const filteredList = listRestuarant?.filter((restaurant) => restaurant?.info?.avgRating > 4.5); 
                           
                            setfilterRes(filteredList); 
+                           
                          }}> Top rated restaurants
                          </button>
                          </div >
                       </div>
+                      
           <div className = "res-container flex flex-wrap justify-center"> 
      {filterRes.map((restaurant) => (
          <Link 
          key= {restaurant.info.id}
          to = {"/restaurants/" + restaurant.info.id }>
-         
-
-           </Link> 
+          {restaurant.info.promoted ?
+           (<PromotedRestaurant resData = {restaurant}/>) 
+           :( <RestaurantCard {...restaurant.info}/>) 
+           } </Link>
      ))}
      </div>
   </div>
@@ -85,3 +87,4 @@ const Body = () => {
  )};
 
  export default Body;
+
