@@ -2,40 +2,34 @@ import react from "react";
 import useRestaurantsMenu from "../utils/useRestaurantsMenu";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestauranstMenu =  () => {
 
          const {resId} = useParams()
          const resInfo = useRestaurantsMenu(resId)
-        //  console.log(resInfo?.cards[2]?.card?.card?.info)
-        //  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card)
-        
-   
+       
      if(resInfo == null)return <Shimmer/>
      const{ name,cuisines,costForTwoMessage} = resInfo?.cards[2]?.card?.card?.info;
-        const{itemCards} = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-        // console.log(itemCards)
         
-    return (
-        <div>
-           <h2>{name}</h2>
-            <h4>
-                {cuisines.join(", ")}
-            </h4>
-            <h4>{costForTwoMessage}</h4>
-            <h2>Menu</h2>
-            
-            <ul>
-                {itemCards.map((res) =>(
-                    <li key ={res?.card?.info?.id} >
-                    {res?.card?.info?.name}-{"Rs "}                
-                    {(res?.card?.info?.price/100) || (res?.card?.info?.defaultPrice/100)}
-                    </li>)
-            )}
-                
-               
-            </ul>
-        </div>
+         const categories  = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>(
+            c.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+          ))
+        console.log(categories)
+        
+        
+    return (   
+
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{name}</h1>
+      <p className="font-bold text-lg">
+        {cuisines.join(", ")} - {costForTwoMessage}
+      </p>  
+       
+         { categories.map((c)=> (
+            <RestaurantCategory data= {c.card.card}/>)
+        )}
+      </div>
     )
 }
 export default RestauranstMenu;
