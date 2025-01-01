@@ -1,5 +1,5 @@
 
-import React, { Suspense } from 'react';
+import React, { Suspense,useState } from 'react';
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -11,6 +11,9 @@ import Cart from './components/Cart';
 import  RestaurantsMenu from "./components/RestaurantsMenu"
 import Error from "./components/Error";
 import { createBrowserRouter,RouterProvider, Outlet } from "react-router-dom";
+import UserContext from "./utils/UserContext";
+import { useEffect } from 'react';
+
 
 
  // lazy loading components
@@ -19,13 +22,25 @@ import { createBrowserRouter,RouterProvider, Outlet } from "react-router-dom";
  // on Demand loading
 const  Grocery = lazy(()=> { import("./components/Grocery")})
 const AppLayout = () => {
+    const [userName, setUserName] = useState();
+
+    //authentication
+    useEffect(() => {
+      // Make an API call and send username and password
+      const data = {
+        name: "OM Singh",
+      };
+      setUserName(data.name);
+    }, []);
+  
     return (
-        
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
      <div>
         <Header/>
         <Outlet/>
        
     </div>
+    </UserContext.Provider>
 )}
 
     // defines configuration

@@ -1,15 +1,17 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect,useContext} from 'react';
 import Shimmer from './Shimmer';
 import {Link} from "react-router-dom"
 import RestaurantCard, {withPromotedLabel} from  './RestaurantCard';
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from '../utils/UserContext';
+import { Input } from 'postcss';
 
 const Body = () => {    
     const [listRestuarant, setlistRestuarant] = useState([]);
     const [filterRes, setfilterRes] = useState([]);    
     const [searchtext, setsearchtext] = useState("");
-
+    const {loggedInUser,setUserName} = useContext(UserContext);
     const PromotedRestaurant = withPromotedLabel(RestaurantCard)
     
 
@@ -59,7 +61,8 @@ const Body = () => {
                        }}> search
                        </button >
                    
-                  
+                 
+
                          <button className ="filter-btn bg-gray-200 m-4 px-4 rounded-lg flex items-center"
                          onClick={()=>{
                            const filteredList = listRestuarant?.filter((restaurant) => restaurant?.info?.avgRating > 4.5); 
@@ -69,6 +72,11 @@ const Body = () => {
                          }}> Top rated restaurants
                          </button>
                          </div >
+                         <div className='search m-4 p-4 flex items-center'>
+                         <label> userName :</label>
+                         <input className="border border-black "
+                          type = "text" value = {loggedInUser} onChange = {(e) => setUserName(e.target.value)}/>
+                         </div>
                       </div>
                       
           <div className = "res-container flex flex-wrap justify-center"> 
