@@ -21,7 +21,7 @@ const ItemList = ({items}) => {
                     </span> 
                  </div>
                  <p 
-                 classname = " text-xs"> 
+                 className = " text-xs"> 
                  {item.card.info.description}
                  </p>
 
