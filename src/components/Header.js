@@ -5,12 +5,18 @@ import { Link } from "react-router-dom";
 import Grocery from "./Grocery";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import cartSlice from "../utils/cartSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const[loginLogout, setloginLogout] = useState("login") 
     const OnlineStatus = useOnlineStatus();
-       const {loggedInUser} =  useContext(UserContext);
-      //  console.log(loggedInUser);
+    const {loggedInUser} =  useContext(UserContext);
+    //console.log(loggedInUser)
+
+       //subscribing to the store using useSelector
+      const cartItems = useSelector((store) => store.cart.items)
+      console.log(cartItems)
 
    return  (
    <div className = "flex justify-between shadow-md">
@@ -37,7 +43,7 @@ const Header = () => {
             <Link to ="/contact">Contact</Link>
             </li>
           <li className="px-4">
-            <Link to ="/cart">cart </Link>
+            <Link to ="/cart" className="font-bold">cart ({cartItems.length} items) </Link>
             </li>
           <li className="px-4">
             <Link to ="/Grocery">Grocery </Link>

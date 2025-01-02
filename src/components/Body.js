@@ -22,7 +22,7 @@ const Body = () => {
     const fetchData = async () =>{
      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data?.json();
-
+           //console.log(json)
          const restaurant = json?.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 
          if ( restaurant=== undefined ){
@@ -74,7 +74,7 @@ const Body = () => {
                          </div >
                          <div className='search m-4 p-4 flex items-center'>
                          <label> userName :</label>
-                         <input className="border border-black "
+                         <input className=" px-2 border border-black "
                           type = "text" value = {loggedInUser} onChange = {(e) => setUserName(e.target.value)}/>
                          </div>
                       </div>

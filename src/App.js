@@ -1,5 +1,5 @@
 
-import React, { Suspense,useState } from 'react';
+import React, { Suspense,useState,useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -12,7 +12,8 @@ import  RestaurantsMenu from "./components/RestaurantsMenu"
 import Error from "./components/Error";
 import { createBrowserRouter,RouterProvider, Outlet } from "react-router-dom";
 import UserContext from "./utils/UserContext";
-import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 
 
 
@@ -21,6 +22,7 @@ import { useEffect } from 'react';
  // Dynamic loading
  // on Demand loading
 const  Grocery = lazy(()=> { import("./components/Grocery")})
+
 const AppLayout = () => {
     const [userName, setUserName] = useState();
 
@@ -28,12 +30,13 @@ const AppLayout = () => {
     useEffect(() => {
       // Make an API call and send username and password
       const data = {
-        name: "OM Singh",
+        name: "Ritesh Yadav",
       };
       setUserName(data.name);
     }, []);
   
     return (
+        <Provider store = {appStore}>
         <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
      <div>
         <Header/>
@@ -41,6 +44,7 @@ const AppLayout = () => {
        
     </div>
     </UserContext.Provider>
+    </Provider>
 )}
 
     // defines configuration
